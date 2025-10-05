@@ -11,42 +11,38 @@ using namespace std;
 
 int main() {
   
-  //время твердения, средняя температура свинца и момент времени
-  double solidificationtime, averagetemperature, momentintime;
-
-  //температура жидкого свинца
-  double liquidtemperature;
-  cout << " liquid temperature = ";
-  cin >> liquidtemperature;
+  // Средняя температура свинца(жидкого),средняя температура свинца(затвердевшего), время твердения, момент времени
+  double averageTemperatureLiquid, averageTemperatureSolidification, solidificationTime, momentInTime;
+  // Лимит
+  int limit = 100;
   
-  //температура затвердения
-  double solidificationtemperature;
-  cout << " solidification temperature = ";
-  cin >> solidificationtemperature;
+  // Температура жидкого свинца
+  double liquidTemperature;
+  cout << " liquid Temperature = ";
+  cin >> liquidTemperature;
   
-  solidificationtime = -1.0 / 0.021 * log(solidificationtemperature / liquidtemperature);
+  // Температура затвердения
+  double solidificationTemperature;
+  cout << " solidification Temperature = ";
+  cin >> solidificationTemperature;
   
-  for(momentintime = 10; momentintime <= 30; momentintime += 10) {
-    if(momentintime > solidificationtime) {
-      averagetemperature = solidificationtemperature * exp(-0.015 * (momentintime - solidificationtime));
-      cout << " averagetemperature = " << averagetemperature << endl;
+  solidificationTime = -(1.0 / 0.021) * log(solidificationTemperature / liquidTemperature);
+  
+  for (momentInTime = 0; momentInTime < limit; ++momentInTime) {
+    
+    cout << " moment In Time = ";
+    cin >> momentInTime;
+    
+    averageTemperatureLiquid = liquidTemperature * exp(-0.021 * momentInTime);
+    averageTemperatureSolidification = solidificationTemperature * exp(-0.015 * (momentInTime - solidificationTime));
+    
+    if (momentInTime < solidificationTime) {
+      cout << " average Temperature Liquid = " << averageTemperatureLiquid << endl;
     }
-      
-    else(momentintime > solidificationtime); {
-      averagetemperature = liquidtemperature * exp(-0.021 * momentintime);
-      cout << " averagetemperature = " << averagetemperature << endl;
+    else {
+      cout << " average Temperature Solidification = " << averageTemperatureSolidification << endl;
     }
   }
-    for(momentintime = 50; momentintime < 100; momentintime += 50) {
-    if(momentintime > solidificationtime) {
-      averagetemperature = solidificationtemperature * exp(-0.015 * (momentintime - solidificationtime));
-      cout << " averagetemperature = " << averagetemperature << endl;
-    }
-      
-    else(momentintime > solidificationtime); {
-      averagetemperature = liquidtemperature * exp(-0.021 * momentintime);
-      cout << " averagetemperature = " << averagetemperature << endl;
-    }
-  }
+  
   return 0; 
 }
